@@ -43,3 +43,6 @@ Instance: C:\Users\jod35\Documents\coding\JWT Auth flask\instance
 >>> from models import User
 >>> db.create_all()
 ```
+
+7. Finally run the application with
+```flask run```
