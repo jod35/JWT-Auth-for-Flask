@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token
+from schemas import UserSchema
 from models import User
 
 auth_bp = Blueprint('auth',__name__)
@@ -48,3 +49,5 @@ def login_user():
         ) , 200
     
     return jsonify({"error": "Invalid username or password"}),400
+
+
