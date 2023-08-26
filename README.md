@@ -32,5 +32,14 @@ export FLASK_APP=src/
 
 5. Create the database by running 
 ```bash
-python3 create_db.py
+flask shell
+```
+
+6. In the interactive shell run the following
+```
+Python 3.11.1 (tags/v3.11.1:a7a450f, Dec  6 2022, 19:58:39) [MSC v.1934 64 bit (AMD64)] on win32
+App: main
+Instance: C:\Users\jod35\Documents\coding\JWT Auth flask\instance
+>>> from models import User
+>>> db.create_all()
 ```
