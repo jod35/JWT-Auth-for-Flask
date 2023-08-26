@@ -1,5 +1,5 @@
 from flask import Flask
-from extensions import db
+from extensions import db, jwt
 from auth import auth_bp
 
 def create_app():
@@ -11,6 +11,7 @@ def create_app():
     
     #initialize exts
     db.init_app(app)
+    jwt.init_app(app)
 
 
     #register bluepints
