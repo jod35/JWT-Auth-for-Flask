@@ -1,5 +1,12 @@
 from flask import Blueprint, jsonify, request
-from flask_jwt_extended import create_access_token, create_refresh_token,jwt_required, get_jwt, current_user
+from flask_jwt_extended import (
+    create_access_token,
+    create_refresh_token,
+    jwt_required,
+    get_jwt,
+    current_user,
+    get_jwt_identity,
+)
 from models import User
 
 auth_bp = Blueprint("auth", __name__)
@@ -46,8 +53,25 @@ def login_user():
     return jsonify({"error": "Invalid username or password"}), 400
 
 
-@auth_bp.get('/whoami')
+@auth_bp.get("/whoami")
 @jwt_required()
 def whoami():
+    return jsonify(
+        {
+            "message": "message",
+            "user_details": {
+                "username": current_user.username,
+                "email": current_user.email,
+            },
+        }
+    )
 
-    return jsonify({"message":"message", "user_details":{"username":current_user.username,"email":current_user.email}})
+
+@auth_bp.get("/refresh")
+@jwt_required(refresh=True)
+def refresh_access():
+    identity = get_jwt_identity()
+
+    new_access_token = create_access_token(identity=identity)
+
+    return jsonify({"access_token": new_access_token})
